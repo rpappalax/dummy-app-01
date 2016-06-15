@@ -1,30 +1,175 @@
 {
-  "name": "Demo Testing",
+  "name": "Push Testing",
   "plans": [
-
     {
-      "name": "3 Servers",
-      "description": "3 boxes",
+      "name": "Autopush Architecture",
+      "description": "10",
+      "steps": [
+        {
+          "name": "Connection Node",
+          "instance_count": 1,
+          "instance_region": "us-east-1",
+          "instance_type": "t2.medium",
+          "run_max_time": 3600,
+          "container_name": "bbangert/autopush:0.7",
+          "environment_data": [
+            "AWS_ACCESS_KEY_ID=HI",
+            "AWS_SECRET_ACCESS_KEY=BYE",
+            "STATSD_HOST=$STATSD_HOST",
+            "STATSD_PORT=$STATSD_PORT",
+            "PORT=8080",
+            "ROUTER_HOSTNAME=$PRIVATE_IP",
+            "ROUTER_PORT=8082",
+            "ENDPOINT_HOSTNAME=endpoint.mozilla.org",
+            "ENDPOINT_PORT=80"
+          ],
+          "prune_running": false,
+          "dns_name": "testcluster.mozilla.org",
+          "port_mapping": "8080:8080,8082:8082",
+          "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
+          "docker_series": "pushgo",
+          "additional_command_args": "./pypy/bin/autopush"
+        },
+        {
+          "name": "Endpoint Node",
+          "instance_count": 1,
+          "instance_region": "us-east-1",
+          "instance_type": "t2.medium",
+          "run_max_time": 3600,
+          "container_name": "bbangert/autopush:0.7",
+          "environment_data": [
+            "AWS_ACCESS_KEY_ID=HI",
+            "AWS_SECRET_ACCESS_KEY=BYE",
+            "PORT=80",
+            "STATSD_HOST=$STATSD_HOST",
+            "STATSD_PORT=$STATSD_PORT"
+          ],
+          "prune_running": false,
+          "dns_name": "endpoint.mozilla.org",
+          "port_mapping": "80:80",
+          "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
+          "docker_series": "pushgo",
+          "additional_command_args": "./pypy/bin/autoendpoint"
+        },
+        {
+          "name": "PushTester",
+          "instance_type": "t2.medium",
+          "instance_count": 7,
+          "instance_region": "us-east-1",
+          "run_max_time": 3590,
+          "run_delay": 10,
+          "node_delay": 10,
+          "container_name": "bbangert/simpletest:0.8",
+          "additional_command_args": "testcluster.mozilla.org 8080 20000 ping $STATSD_HOST:$STATSD_PORT +RTS -N2",
+          "docker_series": "push_tester"
+        }
+      ]
+    },
+    {
+      "name": "Long Connection Test - 80",
+      "description": "Bunch of connection runners that never ping.",
       "steps": [
         {
           "name": "Test Cluster",
-          "instance_count": 3,
+          "instance_count": 80,
           "instance_region": "us-east-1",
-          "instance_type": "m3.large",
-          "run_max_time": 300,
-          "container_name": "rpappalax/demo:latest",
-          "environment_data": [
-            "SYNCTO_METRICS_STATSD_SERVER=$STATSD_HOST:$STATSD_PORT",
-            "SYNCTO_SERVER_URL=https://demo.stage.mozaws.net:443",
-            "SYNCTO_NB_USERS=100",
-            "SYNCTO_DURATION=60",
-            "FXA_BROWSERID_ASSERTION=XXXXXX",
-            "FXA_CLIENT_STATE=af0yyyyyyyyyyy8ded42"
-          ],
-          "dns_name": "bitchin.mozilla.org",
-          "port_mapping": "8080:8090,8081:8081,3000:3000",
+          "instance_type": "t2.medium",
+          "run_max_time": 72000,
+          "container_name": "bbangert/ap-loadtester:latest",
           "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
-          "docker_series": "demo"
+          "additional_command_args": "./apenv/bin/aplt_testplan wss://autopush.stage.mozaws.net 'aplt.scenarios:connect_and_idle_forever,25000,23,0'",
+          "docker_series": "push_tester",
+          "prune_running": false
+        }
+      ]
+    },
+    {
+      "name": "Long Connection Test - 40 - us east 1",
+      "description": "Bunch of connection runners that never ping.",
+      "steps": [
+        {
+          "name": "Test Cluster",
+          "instance_count": 40,
+          "instance_region": "us-east-1",
+          "instance_type": "t2.medium",
+          "run_max_time": 72000,
+          "container_name": "bbangert/ap-loadtester:latest",
+          "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
+          "additional_command_args": "./apenv/bin/aplt_testplan wss://autopush.stage.mozaws.net 'aplt.scenarios:connect_and_idle_forever,25000,24,0'",
+          "docker_series": "push_tester",
+          "prune_running": false
+        }
+      ]
+    },
+    {
+      "name": "Long Connection Test - 80 - us west 1",
+      "description": "Bunch of connection runners that never ping.",
+      "steps": [
+        {
+          "name": "Test Cluster",
+          "instance_count": 40,
+          "instance_region": "us-west-1",
+          "instance_type": "t2.medium",
+          "run_max_time": 72000,
+          "container_name": "bbangert/ap-loadtester:latest",
+          "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
+          "additional_command_args": "./apenv/bin/aplt_testplan wss://autopush.stage.mozaws.net 'aplt.scenarios:connect_and_idle_forever,25000,24,0'",
+          "docker_series": "push_tester",
+          "prune_running": false
+        }
+      ]
+    },
+    {
+      "name": "Long Connection Test - 80 - us west 2",
+      "description": "Bunch of connection runners that never ping.",
+      "steps": [
+        {
+          "name": "Test Cluster",
+          "instance_count": 40,
+          "instance_region": "us-west-2",
+          "instance_type": "t2.medium",
+          "run_max_time": 72000,
+          "container_name": "bbangert/ap-loadtester:latest",
+          "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
+          "additional_command_args": "./apenv/bin/aplt_testplan wss://autopush.stage.mozaws.net 'aplt.scenarios:connect_and_idle_forever,25000,24,0'",
+          "docker_series": "push_tester",
+          "prune_running": false
+        }
+      ]
+    },
+    {
+      "name": "Long Connection Test - 80 - us west 2 - bigger",
+      "description": "Bunch of connection runners that never ping.",
+      "steps": [
+        {
+          "name": "Test Cluster",
+          "instance_count": 40,
+          "instance_region": "us-west-2",
+          "instance_type": "t2.large",
+          "run_max_time": 72000,
+          "container_name": "bbangert/ap-loadtester:latest",
+          "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
+          "additional_command_args": "./apenv/bin/aplt_testplan wss://autopush.stage.mozaws.net 'aplt.scenarios:connect_and_idle_forever,25000,24,0'",
+          "docker_series": "push_tester",
+          "prune_running": false
+        }
+      ]
+    },
+    {
+      "name": "Loadtest",
+      "description": "Run all APLT scenarios",
+      "steps": [
+        {
+          "name": "Test Cluster",
+          "instance_count": 80,
+          "instance_region": "us-east-1",
+          "instance_type": "c4.8xlarge",
+          "run_max_time": 72000,
+          "container_name": "bbangert/ap-loadtester:latest",
+          "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
+          "additional_command_args": "./apenv/bin/aplt_testplan wss://autopush.stage.mozaws.net 'aplt.scenarios:loadtest,100,1,0'",
+          "docker_series": "push_tester",
+          "prune_running": false
         }
       ]
     }
