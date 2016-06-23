@@ -161,9 +161,9 @@
       "steps": [
         {
           "name": "Test Cluster",
-          "instance_count": 80,
+          "instance_count": 3,
           "instance_region": "us-east-1",
-          "instance_type": "c4.8xlarge",
+          "instance_type": "t2.medium",
           "run_max_time": 72000,
           "container_name": "bbangert/ap-loadtester:latest",
           "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
