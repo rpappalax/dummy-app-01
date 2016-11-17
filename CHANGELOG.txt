@@ -11,18 +11,9 @@ This document describes changes between each past release.
 0.4.0 (2014-06-04)
 ------------------
 
-- [feature] 1019504 — Ensure hawk session duration is longer than max call-url
-	    duration.
-- [feature] 1019416 — Implements the new TokBox SDK.
-- [feature] 1019504 — Update session expiricy on auth.
-- [feature] Add redis memory usage estimation.
-- [feature] Improve configuratio handling.
-- [config]  `development` ENV became `dev` ENV.
-- [bugfix]  1014224 — Use the master version of loads for load testing.
-- [feature] Remove Mongodb backend.
-- [feature] Implement authentication with Hawk.
-- [feature]  984949 — Add authentication with Firefox Accounts.
-- [feature] Update CORS to support "*".
+- [Issue #3] fix: use the master version of loads for load testing.
+- [Issue #2] feat: dd authentication with Firefox Accounts.
+- [Issue #1] feat: add CORS to support "*".
 
 
 0.3.0 (2014-04-21)
