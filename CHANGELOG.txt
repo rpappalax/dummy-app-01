@@ -1,0 +1,73 @@
+CHANGELOG
+=========
+
+This document describes changes between each past release.
+
+0.5.0 (unreleased)
+-------------------
+
+- No changes yet.
+
+0.4.0 (2014-06-04)
+------------------
+
+- [feature] 1019504 — Ensure hawk session duration is longer than max call-url
+	    duration.
+- [feature] 1019416 — Implements the new TokBox SDK.
+- [feature] 1019504 — Update session expiricy on auth.
+- [feature] Add redis memory usage estimation.
+- [feature] Improve configuratio handling.
+- [config]  `development` ENV became `dev` ENV.
+- [bugfix]  1014224 — Use the master version of loads for load testing.
+- [feature] Remove Mongodb backend.
+- [feature] Implement authentication with Hawk.
+- [feature]  984949 — Add authentication with Firefox Accounts.
+- [feature] Update CORS to support "*".
+
+
+0.3.0 (2014-04-21)
+------------------
+
+- [feature] 985991 — Rewrite Store in Storage (with redis as default storage).
+- [bugfix]  988902 — Remove authentication for discarding a call.
+- [bugfix]  988893 — Move URL revocation.
+- [feature] 988845 — Add POST /call-url expiresIn parameter.
+- [feature] Add TTL on urls.
+- [feature] Add TTL on revocation and callUrl stores.
+- [feature] 984383 — Write the API documentation.
+- [feature] 994967 — Add a heartbeat endpoint that ping the storage and the partner API.
+- [feature] 996488 — Add the FakePartner interface for load testing.
+- [feature] 989252 — Add an API logger for development.
+- [feature] 987853 — 985388 — Add Timestamp and Retry-After headers.
+- [feature] Add server telemetry using a Statsd endpoint.
+
+
+0.2.0 (2014-03-26)
+------------------
+
+- [feature] 984325 — Log server errors using Sentry.
+- [feature] 986057 — Accept CORS requests.
+- [feature] 986533 — Have the caller name in the token.
+- [feature] 985983 — Add the discard call endpoint.
+- [feature] 985990 — 988255 — Add the revoke call endpoint.
+- [feature] 988250 — Better handle OpenTok error messages.
+- [feature] 985919 — Improve 400 errors format.
+
+
+0.1.0 (2014-03-20)
+------------------
+
+- [feature] Get the basic API working.
+
+
+How to get more details?
+------------------------
+
+Use git to see what happend since last release::
+
+    git diff 0.9.0...
+
+Or git to see what happend between two releases::
+
+    git diff 0.8.0..0.9.0
+
