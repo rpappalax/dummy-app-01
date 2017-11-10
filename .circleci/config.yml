@@ -47,7 +47,10 @@ jobs:
             #python manage.py test
             ./run.sh
 
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
-          
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker tag app "firefoxtesteng/dummy-app-01"
+              docker push "firefoxtesteng/dummy-app-01:latest"
+            fi
