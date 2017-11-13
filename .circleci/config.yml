@@ -40,6 +40,14 @@ jobs:
             #python manage.py test
             ./run.sh
 
+      - type: setup-docker-engine
+      - type: shell
+        name: Verify Docker Works
+        command: |
+          docker --version
+          docker run hello-world
+
+
       - run: |
          docker login -u $DOCKER_USER -p $DOCKER_PASS
       # build the application image
@@ -48,3 +56,4 @@ jobs:
       # deploy the image
       #- run: docker push firefoxtesteng/dummy-app-01:$CIRCLE_BRANCH
       - run: docker push rppapalax/dummy-app-01:$CIRCLE_BRANCH
+
