@@ -4,4 +4,6 @@ __pycache__
 .firefox
 .cache
 .git
+README.md
+.circleci
 
