@@ -55,5 +55,5 @@ jobs:
       - run: docker build -t rpappalax/dummy-app-01:$CIRCLE_BRANCH .
       # deploy the image
       #- run: docker push firefoxtesteng/dummy-app-01:$CIRCLE_BRANCH
-      - run: docker push rppapalax/dummy-app-01:$CIRCLE_BRANCH
+      - run: docker push rpappalax/dummy-app-01:$CIRCLE_BRANCH
 
