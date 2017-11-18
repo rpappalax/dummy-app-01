@@ -54,10 +54,10 @@ jobs:
       - run: | 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker build -t firefoxtesteng/dummy-app-01:latest .
-              docker push firefoxtesteng/dummy-app-01:latest .
+              docker push firefoxtesteng/dummy-app-01:latest
             else
               docker build -t firefoxtesteng/dummy-app-01:$CIRCLE_BRANCH .
-              docker push firefoxtesteng/dummy-app-01:$CIRCLE_BRANCH .
+              docker push firefoxtesteng/dummy-app-01:$CIRCLE_BRANCH
             fi
       #- run: docker build -t rpappalax/dummy-app-01:$CIRCLE_BRANCH .
       # deploy the image
