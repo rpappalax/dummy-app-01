@@ -13,7 +13,7 @@ This document covers the following:
 
 **Objectives**
 
-Design and create loadtests (see: `writing-a-loadtest`) to ensure our web services are both:
+Design and create loadtests (see: :ref:`Writing a Loadtest <writing-a-loadtest>`) to ensure our web services are both:
 
 1. reliable 
  - API works as expected at all times
@@ -27,11 +27,11 @@ Execute those tests to verify web services in each of the following environments
  - Perform short-running smoke tests with a nominal load against API
  - purpose: enables Devs to quickly know if a commit to master creates a regression
  - note: these tests are performed against a temporary docker instance of the web service and shouldn't exceed 30 seconds in duration
-1. `STAGE`
+2. `STAGE`
  - Perform longer-running load tests with larger loads against API
  - Enables Dev, Ops and QA to know if a PRODUCTION-like service is both reliable and scalable after deployment
  - note: these tests are performed against a PRODUCTION-like web service deployed to STAGE and may run as long as 30 minutes
-1. `PRODUCTION`
+3. `PRODUCTION`
   - Perform short-running smoke tests with a nominal load against API
   - Ensures API is reliable  after deployments to PRODUCTION
   - NOTE: never do scalability loadtesting against a production service! 
@@ -79,7 +79,7 @@ xxx Molotov_.  ixxxxx
 xxx Ardere_.  ixxxxx
 
 
-.. seealso::
+.. see also::
 
    `Mozilla Services on GitHub <https://github.com/mozilla-services/>`_
       Mozilla Services' organization account on GitHub.
