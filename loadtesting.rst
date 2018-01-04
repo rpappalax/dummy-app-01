@@ -13,7 +13,7 @@ This document covers the following:
 
 **Objectives**
 
-Design and create loadtests (see: :ref:`Writing a Loadtest <writing-a-loadtest>`) to ensure our web services are both:
+Design and create loadtests (see: `Writing a Loadtest <writing-a-loadtest>`_) to ensure our web services are both:
 
 1. reliable 
  - API works as expected at all times
@@ -44,7 +44,7 @@ Writing a Loadtest
 
 There are a number of tools and frameworks available in which to write loadtest scripts.
 
-For nearly all of our loadtesting, we use the [python molotov framework](https://molotov.readthedocs.io/) created by [Tarek Ziade](https://github.com/tarekziade/).
+For nearly all of our loadtesting, we use the `python molotov framework <https://molotov.readthedocs.io/>` created by `Tarek Ziade <https://github.com/tarekziade/>`.
 
 Molotov uses aiohttp which allows you to easily spawn, throttle and control multiple attacks from one host.  For testing of smaller services, a Molotov test can even be run without employing an attack cluster, though we do use another tool called [ardere](https://github.com/loads/ardere) 
 - Creating and hosting a docker image of your test on dockerhub
