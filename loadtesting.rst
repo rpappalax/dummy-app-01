@@ -13,7 +13,7 @@ This document covers the following:
 
 **Objectives**
 
-Design and create loadtests (see: `Writing a Loadtest <writing-a-loadtest>`_) to ensure our web services are both:
+Design and create loadtests (see: `Writing a Loadtest`_) to ensure our web services are both:
 
 1. reliable 
  - API works as expected at all times
@@ -37,7 +37,7 @@ Execute those tests to verify web services in each of the following environments
   - NOTE: never do scalability loadtesting against a production service! 
 
 
-.. _writing-a-loadtest:
+.. _Writing a Loadtest:
 
 Writing a Loadtest
 ------------------------------
