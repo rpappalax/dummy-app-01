@@ -13,7 +13,7 @@ This document covers the following:
 
 **Objectives**
 
-Design and create loadtests (see: Writing a Loadtest <writing-a-loadtest_>) to ensure our web services are both:
+Design and create loadtests (see: `Writing a Loadtest <writing-a-loadtest>`_) to ensure our web services are both:
 
 1. reliable 
  - API works as expected at all times
